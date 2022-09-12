@@ -1,3 +1,4 @@
+const { find } = require("../models/Book.model");
 const Book = require("../models/Book.model");
 
 module.exports.booksController = {
@@ -16,7 +17,7 @@ module.exports.booksController = {
   },
   deleteBook: async (req, res) => {
     try {
-      const book = await Book.deleteOne();
+      const book = await Book.deleteOne(req.params.id);
       res.json(book);
     } catch (e) {
       res.json(e.message);
@@ -24,7 +25,7 @@ module.exports.booksController = {
   },
   changeBook: async (req, res) => {
     try {
-      const book = await Book.findByIdAndUpdate(req.params.id);
+      const book = await Book.findByIdAndUpdate(req.params.id, {});
       res.json(book);
     } catch (e) {
       res.json(e.message);
